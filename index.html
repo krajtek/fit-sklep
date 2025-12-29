@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <title>FitPower Sklep – Sprzęt fitness i siłownia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #f4f4f6;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    header {
+      background: #151826;
+      color: #fff;
+      padding: 15px 30px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.4rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .logo span {
+      color: #ff4b4b;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover {
+      color: #ff4b4b;
+    }
+
+    /* HERO */
+
+    .hero {
+      background: linear-gradient(135deg, #151826 0%, #20263b 50%, #141820 100%);
+      color: #fff;
+      padding: 50px 20px 60px;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.1rem, 3.2vw, 2.8rem);
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 1rem;
+      max-width: 450px;
+      opacity: 0.9;
+      margin-bottom: 20px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid #ff4b4b;
+      color: #ffb7b7;
+      margin-bottom: 15px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: #ff4b4b;
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(255, 75, 75, 0.45);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 22px rgba(255, 75, 75, 0.6);
+      background: #ff3434;
+    }
+
+    .btn-outline {
+      border: 1px solid #fff;
+      background: transparent;
+      color: #fff;
+    }
+
+    .btn-outline:hover {
+      background: #fff;
+      color: #151826;
+    }
+
+    .hero-img {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 24px 45px rgba(0, 0, 0, 0.6);
+      min-height: 260px;
+      background: radial-gradient(circle at 20% 20%, #ff4b4b 0, transparent 45%),
+                  radial-gradient(circle at 80% 80%, #4b78ff 0, transparent 50%),
+                  #10131e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-img-inner {
+      text-align: center;
+      padding: 25px;
+    }
+
+    .hero-img-inner h2 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    .hero-img-inner p {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      margin-bottom: 10px;
+    }
+
+    .hero-img-equipment {
+      margin-top: 8px;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 0.8rem;
+    }
+
+    .hero-pill {
+      border-radius: 999px;
+      padding: 4px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(0, 0, 0, 0.25);
+    }
+
+    /* MAIN LAYOUT */
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 30px 20px 60px;
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.1fr);
+      gap: 35px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+      main {
+        grid-template-columns: 1fr;
+      }
+      header {
+        padding-inline: 15px;
+      }
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      nav ul {
+        font-size: 0.9rem;
+      }
+    }
+
+    h2.section-title {
+      font-size: 1.3rem;
+      margin-bottom: 14px;
+    }
+
+    /* PRODUCTS */
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+      margin-bottom: 25px;
+    }
+
+    .product-card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-img {
+      background-size: cover;
+      background-position: center;
+      height: 130px;
+    }
+
+    .product-body {
+      padding: 10px 12px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .product-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .product-meta {
+      font-size: 0.8rem;
+      opacity: 0.75;
+    }
+
+    .product-price-row {
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.9rem;
+    }
+
+    .product-price {
+      font-weight: 700;
+      color: #ff4b4b;
+    }
+
+    .product-btn {
+      font-size: 0.8rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #151826;
+      background: transparent;
+      cursor: pointer;
+      transition: 0.15s ease;
+    }
+
+    .product-btn:hover {
+      background: #151826;
+      color: #fff;
+    }
+
+    /* NEWS / AKTUALNOŚCI */
+
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .news-item {
+      background: #fff;
+      border-radius: 14px;
+      padding: 14px 14px 12px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+      border-left: 4px solid #e5e7f0;
+    }
+ .news-header {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .news-thumb {
+      width: 110px;
+      height: 80px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 600px) {
+      .news-header {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+      .news-thumb {
+        width: 90px;
+        height: 70px;
+      }
+    }
+    .news-item.latest {
+      border-left-color: #ff4b4b;
+      position: relative;
+    }
+
+    .news-item.latest::before {
+      content: "NOWOŚĆ";
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      color: #ff4b4b;
+    }
+
+    .news-date {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      margin-bottom: 6px;
+    }
+
+    .news-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .news-text {
+      font-size: 0.9rem;
+    }
+
+    .news-winners {
+      margin-top: 8px;
+      padding-left: 18px;
+      font-size: 0.9rem;
+    }
+
+    .news-winners li strong {
+      font-weight: 700;
+    }
+
+    /* SIDEBAR */
+
+    .sidebar-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 16px 16px 18px;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+      margin-bottom: 18px;
+    }
+
+    .sidebar-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+    }
+
+    .banner {
+      border-radius: 14px;
+      overflow: hidden;
+      margin-top: 10px;
+      background: linear-gradient(135deg, #151826, #ff4b4b);
+      color: #fff;
+      padding: 14px 14px 16px;
+    }
+
+    .banner small {
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+
+    .banner h4 {
+      margin-top: 6px;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .banner p {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    .banner span {
+      font-weight: 700;
+    }
+
+    .sidebar-list {
+      font-size: 0.9rem;
+      list-style: disc;
+      padding-left: 18px;
+      margin-top: 4px;
+    }
+
+    footer {
+      background: #151826;
+      color: #9ca3af;
+      font-size: 0.8rem;
+      text-align: center;
+      padding: 18px 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="logo">Fit<span>Power</span></div>
+      <nav>
+        <ul>
+          <li><a href="#produkty">Produkty</a></li>
+          <li><a href="#aktualnosci">Aktualności</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">Nowa kolekcja • 2025</div>
+        <h1>Sklep z produktami fitness i sprzętem do domowej siłowni</h1>
+        <p>
+          Hantle, ławki, gumy oporowe, atlasy i akcesoria treningowe – wszystko,
+          czego potrzebujesz, żeby zrobić formę bez wychodzenia z domu.
+        </p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary">Zobacz bestsellery</button>
+          <button class="btn btn-outline">Zbuduj własną siłownię</button>
+        </div>
+      </div>
+
+      <div class="hero-img">
+        <!-- Tu może wlecieć grafika mockupowa sprzętu – na razie abstrakcyjny „klimat siłowni” -->
+        <div class="hero-img-inner">
+          <h2>Domowa siłownia na wyciągnięcie ręki</h2>
+          <p>Połącz atlas z hantlami, gumami i ławką – dopasuj zestaw do swojego metrażu i celu.</p>
+          <div class="hero-img-equipment">
+            <span class="hero-pill">Atlas wielofunkcyjny</span>
+            <span class="hero-pill">Hantle regulowane</span>
+            <span class="hero-pill">Gumy oporowe</span>
+            <span class="hero-pill">Mata treningowa</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <main>
+    <section aria-labelledby="produkty">
+      <h2 id="produkty" class="section-title">Polecane produkty</h2>
+
+      <div class="products-grid">
+        <!-- Produkt 1 -->
+        <article class="product-card">
+          <div class="product-img" style="background-image:url('https://images.pexels.com/photos/1552249/pexels-photo-1552249.jpeg?auto=compress&cs=tinysrgb&w=800');"></div>
+          <div class="product-body">
+            <div class="product-name">Hantle HEX 2×10 kg</div>
+            <div class="product-meta">Idealne do treningu siłowego w domu.</div>
+            <div class="product-price-row">
+              <span class="product-price">299 zł</span>
+              <button class="product-btn">Do koszyka</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Produkt 2 -->
+        <article class="product-card">
+          <div class="product-img" style="background-image:url('https://images.pexels.com/photos/669577/pexels-photo-669577.jpeg?auto=compress&cs=tinysrgb&w=800');"></div>
+          <div class="product-body">
+            <div class="product-name">Gumy oporowe PRO (zestaw)</div>
+            <div class="product-meta">Cztery poziomy oporu, trening całego ciała.</div>
+            <div class="product-price-row">
+              <span class="product-price">89 zł</span>
+              <button class="product-btn">Do koszyka</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Produkt 3 -->
+        <article class="product-card">
+          <div class="product-img" style="background-image:url('https://images.pexels.com/photos/1552104/pexels-photo-1552104.jpeg?auto=compress&cs=tinysrgb&w=800');"></div>
+          <div class="product-body">
+            <div class="product-name">Ławka treningowa składana</div>
+            <div class="product-meta">Regulacja oparcia, łatwe przechowywanie.</div>
+            <div class="product-price-row">
+              <span class="product-price">449 zł</span>
+              <button class="product-btn">Do koszyka</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Produkt 4 -->
+        <article class="product-card">
+          <div class="product-img" style="background-image:url('https://images.pexels.com/photos/3837781/pexels-photo-3837781.jpeg?auto=compress&cs=tinysrgb&w=800');"></div>
+          <div class="product-body">
+            <div class="product-name">Mata treningowa PREMIUM</div>
+            <div class="product-meta">Gęsta pianka, antypoślizgowa powierzchnia.</div>
+            <div class="product-price-row">
+              <span class="product-price">129 zł</span>
+              <button class="product-btn">Do koszyka</button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+       <h2 id="aktualnosci" class="section-title">Aktualności</h2>
+
+      <div class="news-list">
+        <!-- Najnowsza aktualność – konkurs, atlas -->
+        <article class="news-item latest">
+          <div class="news-header">
+            <!-- TU użyj swojego zdjęcia atlasu; podmień nazwę pliku -->
+            <img src="https://i.erli.pl/jrkyk1.86a616.xxl.webp"
+                 alt="Atlas do domowej siłowni – nagroda w konkursie"
+                 class="news-thumb" />
+            <div>
+              <div class="news-date">29 grudnia 2025</div>
+              <div class="news-title">Wyniki konkursu „Wygraj atlas do domowej siłowni”</div>
+            </div>
+          </div>
+
+          <p class="news-text">
+            Z przyjemnością ogłaszamy zwycięzców naszego świątecznego konkursu,
+            w którym nagrodą główną był wielofunkcyjny atlas do domowej siłowni.
+            Dziękujemy wszystkim za udział – poniżej prezentujemy listę 4 laureatów:
+          </p>
+          <ul class="news-winners">
+            <li>Anna Kowalczyk – Lubartów</li>
+            <li>Piotr Niedziołko – Koło</li>
+            <li>Mateusz Nowak – Wola Uhruska</li>
+            <li>Karolina Jankowska – Sanok</li>
+          </ul>
+          <p class="news-text" style="margin-top:8px;">
+            Zwycięzcy otrzymają od nas wiadomość e-mail z potwierdzeniem oraz szczegółami
+            dostawy. Gratulujemy i życzymy udanych treningów na nowym sprzęcie!
+          </p>
+        </article>
+
+        <!-- Starsza aktualność – nowe gumy oporowe -->
+        <article class="news-item">
+          <div class="news-header">
+            <img src="https://images.pexels.com/photos/6456300/pexels-photo-6456300.jpeg?auto=compress&cs=tinysrgb&w=800"
+                 alt="Zestaw gum oporowych"
+                 class="news-thumb" />
+            <div>
+              <div class="news-date">15 grudnia 2025</div>
+              <div class="news-title">Nowa kolekcja gum oporowych i minibands</div>
+            </div>
+          </div>
+          <p class="news-text">
+            Do oferty trafiły nowe zestawy gum oporowych i minibands w trzech poziomach
+            oporu – idealne zarówno do treningu w domu, jak i w klubie fitness.
+            Przy zakupie dwóch zestawów – shaker gratis.
+          </p>
+        </article>
+
+        <!-- Jeszcze jedna – darmowa dostawa -->
+        <article class="news-item">
+          <div class="news-header">
+            <img src="https://i.erli.pl/rde7y2.67590b.l.webp?auto=compress&cs=tinysrgb&w=800"
+                 alt="Paczki z zamówieniami sprzętu fitness"
+                 class="news-thumb" />
+            <div>
+              <div class="news-date">30 listopada 2025</div>
+              <div class="news-title">Darmowa dostawa powyżej 199 zł</div>
+            </div>
+          </div>
+          <p class="news-text">
+            Do końca roku obowiązuje promocja na darmową dostawę zamówień powyżej 199 zł
+            na terenie całej Polski. To dobry moment, żeby skompletować sprzęt na noworoczne
+            postanowienia.
+          </p>
+        </article>
+      </div>
+
+    <!-- SIDEBAR -->
+    <aside>
+      <div class="sidebar-card">
+        <h3>Dlaczego warto trenować z nami?</h3>
+        <ul class="sidebar-list">
+          <li>Starannie wybrany sprzęt od sprawdzonych producentów</li>
+          <li>Pomoc w doborze zestawu pod metraż i poziom zaawansowania</li>
+          <li>Wsparcie posprzedażowe i szybki serwis</li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="banner">
+          <small>Promocja limitowana</small>
+          <h4>Atlas + hantle -10%</h4>
+          <p>
+            Przy zakupie atlasu wielofunkcyjnego z kompletem hantli regulowanych
+            otrzymasz <span>10% rabatu</span> na cały zestaw.
+          </p>
+        </div>
+      </div>
+
+      <div class="sidebar-card" id="kontakt">
+        <h3>Kontakt</h3>
+        <p style="font-size:0.9rem;">
+          FitPower Sklep<br />
+          ul. Przykładowa 10, 00-000 Miasto<br />
+          e-mail: <a href="mailto:kontakt@fitpower.pl">kontakt@fitpower.pl</a><br />
+          tel.: <a href="tel:+48123456789">+48 123 456 789</a>
+        </p>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    &copy; 2025 FitPower Sklep – sprzęt fitness i siłownia. Wszystkie prawa zastrzeżone.
+  </footer>
+</body>
+</html>
